@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Load .env
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,11 +100,11 @@ WSGI_APPLICATION = 'TableTap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tabletap_db',
-        'USER': 'root',
-        'PASSWORD': 'fb952baae007e006e8b5c4bf',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -143,8 +148,8 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': "724753965680-nc5cfc9sn9p00hfeiespcde1lkgagcic.apps.googleusercontent.com",
-            'secret': "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",
+            'client_id': os.getenv('GOOGLE_CLIENT_ID'),
+            'secret': os.getenv('GOOGLE_CLIENT_SECRET'),
         },
         'SCOPE': ['profile','email',],
         'AUTH_PARAMS': {'access_type': 'online'},
