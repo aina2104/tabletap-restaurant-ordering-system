@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4 content">
+    <h2>Delete Category Confirmation</h2>
+    <div class="mb-4">
+        <h2>Are you sure you want to delete category {{ category.Category_Name }} from menu {{ menu.Menu_Name }}?</h2>
+        <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'owner_menu' menu.id category.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

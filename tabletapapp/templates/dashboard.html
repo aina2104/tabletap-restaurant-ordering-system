@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block custom_stylesheet %}
+    <link rel="stylesheet" href="{% static 'tabletapapp/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sidebar col-3 col-lg-3 col-xl-2">
+                <div class="sidebar-content" id="sidebarContent">
+                    <a href="{% url 'add_category' menu.id %}" class="btn btn-primary mb-3" style="color: white">
+                        Add Category
+                    </a>
+                    {% if categories %}
+                        {% for category in categories %}
+                            <a href="{% url 'owner_menu' menu.id category.id %}"
+                                class="{% if active_category.id == category.id %}active{% endif %}">
+                                {{ category.Category_Name }}
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-9 px-4">
+                <h2>Menu: {{ menu.Menu_Name }}</h2>
+                {% if categories %}
+                    <h3>Category: {{ active_category.Category_Name }}</h3>
+                    <a href="{% url 'update_category' menu.id active_category.id %}" class="btn btn-primary mb-3">Update Category Name</a>
+                    <a href="{% url 'delete_category' active_category.id %}" class="btn btn-primary mb-3">Delete Category</a>
+                    <a href="{% url 'add_item' menu.id active_category.id %}" class="btn btn-primary mb-3">Add Food Item</a>
+                    {% if items %}
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="menuItems">
+                            {% for item in items %}
+                            <div class="col">
+                                <div class="card h-100 d-flex flex-column justify-content-between">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">{{ item.Item_Name }}</h5>
+                                        <p class="card-text">{{ item.Description }}</p>
+                                        <p class="card-text">${{ item.Price }}</p>
+                                        <div class="mt-auto d-flex justify-content-end gap-2 pt-3">
+                                            <a href="{% url 'update_item' menu.id active_category.id item.id %}" 
+                                               class="btn btn-sm btn-warning" 
+                                               data-bs-toggle="tooltip" 
+                                               title="Update">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a href="{% url 'delete_item' menu.id active_category.id item.id %}" 
+                                               class="btn btn-sm btn-warning" 
+                                               data-bs-toggle="tooltip" 
+                                               title="Delete">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="mt-3"><p> Add your first category to start.</p></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+.hero {
+    background-color: #f0f0f0;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-content {
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cta-button {
+    background-color: #fa7000;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: darkorange;
+    border-color: darkorange;
+}
+
+.features {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.benefits {
+    background-color: #e0f7fa;
+    padding: 50px 0;
+    text-align: center;
+}

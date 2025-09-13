@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block custom_stylesheet %}
+    <style>
+        .card-header {
+            background-color: #fa7000; /* Strong Orange */
+            border-color: #fa7000;
+        }
+    </style>
+{% endblock %}
+    
+{% block content %}
+    
+    <div class="container mt-5 content">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header text-white d-flex justify-content-between">
+                <h4 class="mb-0">Profile Information</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="firstName" class="form-label fw-bold">First Name:</label>
+                            <input type="text" class="form-control" id="first_name" value="{{ user.first_name }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="firstName" class="form-label fw-bold">Username:</label>
+                            <input type="text" class="form-control" id="username" value="{{ user.username }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="lasttName" class="form-label fw-bold">Last Name:</label>
+                            <input type="text" class="form-control" id="last_name" value="{{ user.last_name }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label fw-bold">Email:</label>
+                            <input type="email" class="form-control" id="email" value="{{ user.email }}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% for restaurant in restaurants %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header text-white d-flex justify-content-between">
+                <h4 class="mb-0">Restaurant Information</h4>
+                <a class="btn btn-light btn-sm" href="{% url 'edit_restaurant' restaurant.id %}"><i class="fas fa-edit"></i> Update</a>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="restaurantName" class="form-label fw-bold">Restaurant Name:</label>
+                            <input type="text" class="form-control" id="restaurantName" value="{{ restaurant.Restaurant_Name }}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="restaurantId" class="form-label fw-bold">Restaurant ID:</label>
+                            <input type="text" class="form-control" id="restaurantId" value="#{{ restaurant.id }}" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="numberOfTables" class="form-label fw-bold">Number of Tables:</label>
+                            <input type="number" class="form-control" id="numberOfTables" value="{{ restaurant.Table_Amount }}" readonly>
+                        </div>
+                    </div>
+                </form>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Menus:</label>
+                    <ul class="list-group">
+                        {% for menu in menus %}
+                            {% if menu.Restaurant_ID == restaurant %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ menu.Menu_Name }}
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-outline-warning btn-sm" href="{% url 'update_menu' menu.id %}">Update Name</a>
+                                        <a class="btn btn-outline-warning btn-sm" href="{% url 'owner_menu' menu.id 0 %}">View Menu</a>
+                                        <a class="btn btn-outline-warning btn-sm" href="{% url 'delete_menu' menu.id %}">Delete Menu</a>
+                                    </div>
+                                </li>
+                                {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="d-grid gap-2">
+                    <a class="btn btn-warning btn-sm w-100" href="{% url 'qr_code' restaurant.id %}">
+                        <i class="fas fa-qrcode"></i> Generate QR Code
+                    </a>
+                    <a class="btn btn-warning btn-sm w-100" href="{% url 'add_menu' restaurant.id %}">
+                        <i class="fas fa-plus"></i> Add Menu
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="text-center">
+            <a class="btn btn-primary" href="{% url 'add_restaurant' %}"><i class="fas fa-plus"></i> Add Restaurant</a>
+        </div>
+    </div>
+{% endblock %}

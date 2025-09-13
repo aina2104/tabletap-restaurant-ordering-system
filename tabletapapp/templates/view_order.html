@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block custom_stylesheet %}
+    <link rel="stylesheet" href="{% static 'tabletapapp/view_order.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 content">
+        <h1>Current Orders</h1>
+
+        <h2>Tables in Progress</h2>
+        {% if orders %}
+            {% for order in orders %}
+                <div class="table-item in-progress
+                            {% if active_order.id == order.id %}
+                                awaiting-confirmation
+                            {% endif %}">
+                    <span>Table {{ order.Table_ID.id }}</span>
+                    <a class="btn btn-primary" href="{% url 'view_order' order.id %}">View Order</a>
+                </div>
+            {% endfor %}
+
+            <div class="order-details">
+                <h2>Order Details - Table {{ active_order.Table_ID.id }}</h2>
+                <p>Time Created: {{ active_order.Created_At }}</p>
+                <div class="order-header">
+                    <span>Item</span>
+                    <span>Quantity</span>
+                    <span>Price</span>
+                </div>
+                {% for item in items %}
+                    <div class="order-item">
+                        <span>{{ item.Item_Name }}</span>
+                        <span>{{ item.Quantity }}</span>
+                        <span>${{ item.Price }}</span>
+                    </div>
+                {% endfor %}
+                <div class="order-total">
+                    Total Price: ${{ active_order.Total_Price }}
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mt-3">
+                        <button class="btn btn-primary">Order Completed</button>
+                    </div>
+                </form>
+            </div>  
+        {% else %}
+            <p> There are no orders submitted.</p>
+        {% endif %}
+    </div>
+{% endblock %}

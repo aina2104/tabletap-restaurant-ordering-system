@@ -1,0 +1,102 @@
+.category-nav {
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    height: 100vh;
+}
+.category-nav a {
+    display: block;
+    margin-bottom: 10px;
+}
+.food-item-container {
+    width: 200px;
+    margin-bottom: 20px;
+}
+.food-item-container img {
+    max-width: 100%;
+    height: auto;
+}
+.food-item-container h5 {
+    margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+    .category-nav {
+        width: 60px;
+        padding: 10px;
+    }
+    .category-nav a span, #addCategorySection span span {
+        display: none; /* Hide category navigation text */
+    }
+    .category-nav a i, #addCategorySection i {
+        display: block; /* Show icons */
+    }
+}
+.sidebar {
+    margin: 0;
+    padding: 0;
+    background-color: #fffacd;
+    height: 100vh;
+    overflow: auto;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    background-color: #fff0b3;
+    color: black;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+}
+.btn {
+    background-color: #ff9800;
+    color: white;
+    border-color: #ff9800;
+}
+
+.btn:hover {
+    background-color: darkorange;
+    border-color: darkorange;
+}
+footer {
+    background-color: #fffacd; /* Pastel Yellow */
+}
+.navbar {
+    background-color: #fffacd; /* Pastel Yellow */
+}

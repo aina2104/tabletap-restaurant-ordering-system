@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block custom_stylesheet %}
+    <link rel="stylesheet" href="{% static 'tabletapapp/sign_up.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5 content">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h2 class="text-center mb-4">Login</h2>
+                    <form method="POST" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {% for field in form %} {% for error in field.errors %}
+                            <div>{{ error }}</div>
+                            {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+                            <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="login" name="login" placeholder="Enter username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

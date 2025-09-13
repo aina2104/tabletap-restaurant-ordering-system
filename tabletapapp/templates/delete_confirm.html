@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4 content">
+    <h2>Delete Confirmation</h2>
+    <div class="mb-4">
+        <h2>Are you sure you want to delete?</h2>
+        <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel and Back to Profile</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

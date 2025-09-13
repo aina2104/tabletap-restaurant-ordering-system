@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    flex: 1;
+}
+
+.navbar a, .navbar-brand {
+    color: black;
+}
+footer {
+    background-color: #fffacd; /* Pastel Yellow */
+}
+.navbar {
+    background-color: #fffacd; /* Pastel Yellow */
+}
+.btn-primary {
+    background-color: #fa7000; /* Strong Orange */
+    border-color: #fa7000;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: darkorange;
+    border-color: darkorange;
+    color: white;
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #fa7000; /* Strong Orange */
+    color: white;
+    border-color: #fa7000;
+}
+
+.btn:hover {
+    background-color: darkorange;
+    border-color: darkorange;
+    color: white;
+    font-weight: bold;
+}

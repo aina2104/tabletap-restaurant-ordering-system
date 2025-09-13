@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block custom_stylesheet %}
+    <link rel="stylesheet" href="{% static 'tabletapapp/landing_page.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>{{ title }}</h1>
+                <p>Seamlessly manage orders, create dynamic menus, and organise categories for peak efficiency.</p>
+                <a class="cta-button"
+                    {% if user.is_authenticated %}
+                        href="{% url 'profile' %}"
+                    {% else %}
+                        href="{% url 'account_login' %}"
+                    {% endif %}>Get Started</a>
+            </div>
+            <div class="hero-image">
+                <img src="{% static 'tabletapapp/TableTap preview.png' %}" alt="Restaurant Ordering Process" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Seamless Order Management</h5>
+                            <p class="card-text">Our easy-to-use interface ensures accurate order handling and reduces processing time</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Dynamic Menu Creation</h5>
+                            <p class="card-text">Easily create and update menus, adding categories and descriptions with just a few clicks</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Simple Category Organisation</h5>
+                            <p class="card-text">Create a positive customer experience by efficiently organizing your menu items</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2>Boost Efficiency and Increase Sales</h2>
+            <ul class="list-unstyled">
+                <li>Reduce order errors and processing time.</li>
+                <li>Easily update menus and pricing in real-time.</li>
+                <li>Improve customer experience with seamless ordering.</li>
+                <li>Gain valuable insights into sales and customer preferences.</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}

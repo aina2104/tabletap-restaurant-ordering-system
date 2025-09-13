@@ -1,0 +1,61 @@
+{% extends "customer_base.html" %}
+{% load static %}
+
+{% block custom_stylesheet %}
+    <link rel="stylesheet" href="{% static 'tabletapapp/view_cart.css' %}">
+{% endblock %}
+
+{% block nav_buttons %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'all_menus' table_id restaurant_id %}">All Menus</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'view_cart' table_id restaurant_id menu_id %}">View Cart</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 content">
+        <div class="order-section">
+            {% if items %}
+                <h1>Your Order</h1>
+                <div class="cart-header">
+                    <span>Item</span>
+                    <span>Quantity</span>
+                    <span>Price</span>
+                    <span><!-- blank for update button --></span>
+                </div>
+                {% for item in items %}
+                    <div class="cart-item">
+                        <span>{{ item.Item_Name }}</span>
+                        <span>{{ item.Quantity }}</span>
+                        <span>${{ item.Price }}</span>
+                        {% if not order.Customer_Submitted %}
+                            <a class="btn btn-sm btn-outline-primary">Update</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="total-price mt-3">
+                    Total: ${{ total_price }}
+                </div>
+            {% else %}
+                <p> There is no items in your cart.</p>
+            {% endif %}
+            <div class="button-container mt-3 d-flex justify-content-between">
+                <a class="btn btn-warning" href="{% url 'customer_menu' table_id menu_id 0 %}">
+                    <i class="bi bi-arrow-left"></i> Back to Menu
+                </a>
+                {% if items %}
+                    {% if not order.Customer_Submitted %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Submit Order
+                        </button>
+                    </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Django / project-specific
+*.sqlite3
+db.sqlite3
+*.log
+local_settings.py
+media/
+staticfiles/
+# Uncomment the line below if you only want to ignore collected static files
+# static/
+
+# Environment / secrets
+.env
+.env.local
+*.key
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / frontend (if you have npm/yarn stuff in your Django project)
+node_modules/
+
+# IDEs / editors
+.vscode/
+.idea/
+*.iml
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# macOS
+.DS_Store

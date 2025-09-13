@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load qr_code %}
+
+{% block content %}
+    <div class="container mt-5 content">
+        <div class="row row-cols-auto justify-content-around g-3">
+            {% if menu %}
+                {% for link in links %}
+                    <div class="col">
+                        {% qr_from_text link %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p> Please add your first menu or first category to perform this task.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
